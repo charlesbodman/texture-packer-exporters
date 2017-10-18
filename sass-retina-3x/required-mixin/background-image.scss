@@ -1,0 +1,19 @@
+@mixin background-image($file, $type, $width, $height, $maxResolution) {
+    background-image: url($file + "." + $type);
+
+    @for $i from 2 through $maxResolution {
+        @media only screen and (-webkit-min-device-pixel-ratio: $i),
+               only screen and (-moz-min-device-pixel-ratio: $i),
+               only screen and (-o-min-device-pixel-ratio: $i / 1),
+               only screen and (min-device-pixel-ratio: $i) {
+            & {
+                background-image: url($file + "@" + $i + "x." + $type);
+            }
+        }
+    }
+
+    -webkit-background-size: $width $height;
+    -moz-background-size: $width $height;
+    -o-background-size: $width $height;
+    background-size: $width $height;
+  }
