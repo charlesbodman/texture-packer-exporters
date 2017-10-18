@@ -1,0 +1,19 @@
+{% load filters %}
+.{{texture.trimmedName}} {
+
+    display:inline-block;
+    overflow: hidden;
+    background-repeat:no-repeat;
+	@include background-image('{{texture.fullName}}','png',{{texture.size.width}}px,{{texture.size.height}}px,3);
+
+	{% for sprite in sprites %}
+	&.{{texture.trimmedName}}-{{sprite.trimmedName|hovertoactivefilter}} {
+	    width: {{sprite.frameRect.width}}px;
+	    height: {{sprite.frameRect.height}}px;
+	    background-position: -{{sprite.frameRect.x}}px -{{sprite.frameRect.y}}px;
+	}
+	{% endfor %}
+
+}
+
+
